@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Docs
-permalink: /docs/
+title: CTF
+permalink: /CTF/
 ---
 
-A documentation page.
+This is page CTF
