@@ -1,7 +1,6 @@
 ---
-layout: page
-title: CTF
-permalink: /ctf/
+layout: archive-taxonomies
+type: categories
+title: Categories
+permalink: /categories/
 ---
-
-This is page CTF
