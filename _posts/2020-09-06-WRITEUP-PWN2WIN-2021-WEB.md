@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "WRITEUP PWN2WINCTF 2021: WEB"
+title: "[WRITEUP PWN2WINCTF 2021]: WEB"
 categories: CTF
 toc: true
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
+Dưới đây là một số challenge mình đã giải quyết được. Mọi người thông cảm vì lời văn lủng củng cũng như kiến thức hơi toạch :(
 
 ## Challenge Illusion
 
