@@ -1,4 +1,4 @@
-title: Taidh blogs
+title: Taidh Blogs
 description: Blog security
 author: Đậu Hoàng Tài
 avatar: /logo.png
@@ -41,4 +41,5 @@ social:
     - https://github.com/DauHoangTai
 google_site_verification: u4WXQl0Eu66rsQo2kRdCNx
 lang: en
-skin: Midnight
+skin: midnight
+toc: true
