@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[WRITEUP PWN2WINCTF 2021]: WEB"
+title: "WRITEUP PWN2WINCTF 2021"
 categories: CTF
 toc: true
 ---

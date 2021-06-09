@@ -3,6 +3,7 @@ description: Blog security
 author: Đậu Hoàng Tài
 avatar: /logo.png
 email: hoangtaizxc@gmail.com
+location: Da Nang - Viet Nam
 
 plugins:
   - jekyll-seo-tag
