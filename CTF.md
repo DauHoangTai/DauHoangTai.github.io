@@ -1,7 +1,7 @@
 ---
 layout: page
 title: CTF
-permalink: /categories/#ctf/
+permalink: /ctf/
 ---
 
 This is page CTF
