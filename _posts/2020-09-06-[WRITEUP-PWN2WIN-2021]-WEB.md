@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "[WRITEUP PWN2WINCTF 2021]: WEB"
 categories: CTF
 toc: true
