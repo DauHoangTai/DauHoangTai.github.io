@@ -1,93 +1,82 @@
 ---
-layout: default
+layout: base
 ---
 
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+{% include header.html type="post" %}
 
-  <header class="post-header">
+<div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
+  <div class="row">
+    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
 
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.last_modified_at -%}
-        ~ 
-        {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
-        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-          {{ mdate | date: date_format }}
-        </time>
-      {%- endif -%}
-      {%- if page.author -%}
-        • {% for author in page.author %}
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
-            {%- if forloop.last == false %}, {% endif -%}
-        {% endfor %}
-      {%- endif -%}
-    </p>
+      {% if page.gh-repo %}
+        {% assign gh_split =  page.gh-repo | split:'/'  %}
+        {% assign gh_user =  gh_split[0]  %}
+        {% assign gh_repo =  gh_split[1]  %}
 
-  </header>
+        <div id="header-gh-btns">
+          {% if page.gh-badge.size > 0 %}
+            {% for badge in page.gh-badge %}
+              {% case badge %}
+                {% when 'star'%}
+                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                {% when 'watch'%}
+                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                {% when 'fork'%}
+                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                {% when 'follow'%}
+                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              {% endcase %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endif %}
 
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+      {% if page.before-content %}
+        <div class="before-content">
+          {% for file in page.before-content %}
+            {% include {{ file }} %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <article role="main" class="blog-post">
+        {{ content }}
+      </article>
+
+      {% if page.tags.size > 0 %}
+        <div class="blog-tags">
+          <span>Tags:</span>
+          {% for tag in page.tags %}
+            <a href="{{ '/tags' | relative_url }}#{{- tag -}}">{{- tag -}}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if page.after-content %}
+        <div class="after-content">
+          {% for file in page.after-content %}
+            {% include {{ file }} %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if page.social-share %}
+        {% include social-share.html %}
+      {% endif %}
+
+      <ul class="pagination blog-pager">
+        {% if page.previous.url %}
+        <li class="page-item previous">
+          <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+        </li>
+        {% endif %}
+        {% if page.next.url %}
+        <li class="page-item next">
+          <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% include comments.html %}
+    </div>
   </div>
-
-  <footer class="post-footer">
-    {% if page.categories.size > 0 %}
-      <div class="post-meta">
-        <i class="fas fa-folder"></i>
-        <ul class="post-taxonomies post-categories">
-          {% assign categories = page.categories | sort %}
-          {% for category in categories %}
-            <li class="post-category">
-              {% assign slugified_category = category | slugify %}
-              <a href="{{ '/categories/#:category' | replace: ':category', slugified_category | relative_url }}">{{ category }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-    {% if page.tags.size > 0 %}
-      <div class="post-meta">
-        <i class="fas fa-tags"></i>
-        <ul class="post-taxonomies post-tags">
-          {% assign tags = page.tags | sort %}
-          {% for tag in tags %}
-            <li class="post-tag">
-              {% assign slugified_tag = tag | slugify %}
-              <a href="{{ '/tags/#:tag' | replace: ':tag', slugified_tag | relative_url }}">{{ slugified_tag }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-    <nav class="post-pagination" role="navigation">
-      {% if page.previous %}
-        <a class="post-previous" href="{{ page.previous.url | relative_url }}">
-          <h4 class="post-pagination-label">Prev</h4>
-          <span class="post-pagination-title">
-            <i class="fas fa-arrow-left"></i> {{ page.previous.title | markdownify | strip_html }}
-          </span>
-        </a>
-      {% endif %}
-
-      {% if page.next %}
-        <a class="post-next" href="{{ page.next.url | relative_url }}">
-          <h4 class="post-pagination-label">Next</h4>
-          <span class="post-pagination-title">
-            {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right"></i>
-          </span>
-        </a>
-      {% endif %}
-    </nav>
-  </footer>
-
-  {% if page.comments != false and jekyll.environment == "production" and site.disqus %}
-    {% include disqus.html %}
-  {% endif %}
-  
-</article>
+</div>

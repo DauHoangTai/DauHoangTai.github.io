@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+---
+layout: base
+---
 
-  <head>
-    {% include head.html %}
-  </head>
+<div class="intro-header"></div>
 
-  <body>
-    <div class="site-container">
-      <header class="site-header">
-        {% include header.html %}
-      </header>
-      
-      <div class="site-body wrapper">
-        <aside class="site-sidebar" id="site-sidebar">
-          {% if page.toc %}
-            {% include sidebar-toc.html %}
-          {% else %}
-            {% include sidebar.html %}
-          {% endif %}
-        </aside>
-        <main class="site-main" id="site-main" aria-label="Content" tabindex="1">
-          {{ content }}
-          <footer class="site-footer">
-            {% include footer.html %}
-          </footer>
-        </main>
-      </div>
+<div role="main" class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
+  {% if page.before-content %}
+    <div class="before-content">
+      {% for file in page.before-content %}
+        {% include {{ file }} %}
+      {% endfor %}
     </div>
-  </body>
+  {% endif %}
 
-</html>
+  {{ content }}
+
+  {% if page.after-content %}
+    <div class="after-content">
+      {% for file in page.after-content %}
+        {% include {{ file }} %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
