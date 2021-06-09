@@ -33,7 +33,7 @@ layout: default
           {%- endif -%}
         </p>
         {%- if post.show_excerpts != false -%}
-          <div class="post-excerpt">{{ post.excerpt | strip_html }}</div>
+          <div class="post-excerpt" style="white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 3; -webkit-box-orient: vertical; display: -webkit-box;">{{ post.excerpt | strip_html }}</div>
         {%- endif -%}
       </li>
       {%- endfor -%}
