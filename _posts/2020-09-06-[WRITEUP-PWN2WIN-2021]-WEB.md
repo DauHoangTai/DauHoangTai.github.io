@@ -1,15 +1,10 @@
 ---
-layout: page
+layout: post
 title: "[WRITEUP PWN2WINCTF 2021]: WEB"
 categories: CTF
 toc: true
 ---
-
-
-
-
-
-
+Đây là writeup
 
 ## Challenge Illusion:
 - Source: [illusion](https://github.com/DauHoangTai/CTF/tree/master/2021/Pwn2win/illusion)
