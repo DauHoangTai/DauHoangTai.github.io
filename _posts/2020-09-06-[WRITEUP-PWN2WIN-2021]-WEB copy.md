@@ -2,7 +2,7 @@
 layout: post
 title: "[WRITEUP PWN2WINCTF 2021]: WEB - test by anho"
 categories: CTF
-toc: true
+# toc: true
 ---
 
 LLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
