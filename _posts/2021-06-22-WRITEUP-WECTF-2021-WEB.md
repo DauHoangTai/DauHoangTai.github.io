@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[WRITEUP 3KCTF 2021]: WEB"
+title: "[WRITEUP WECTF 2021]: WEB"
 categories: CTF
 toc: true
 ---
