@@ -5,10 +5,10 @@ categories: CTF
 toc: true
 ---
 
-Đây là giải weCTF lần đầu mình tham gia. Cảm thấy các challenge lần này khá hay nhưng tiếc và client vuln khá nhiều nên mình hơi thọi. Dưới đây là một số writeup các challenge mình giải quyết được.
+Đây là giải weCTF lần đầu mình tham gia. Cảm thấy các challenge lần này khá hay nhưng tiếc là client vuln khá nhiều nên mình hơi thọt. Dưới đây là một số writeup các challenge mình giải quyết được.
 
 Tất cả source của các bài mình làm được mình để ở đây
-https://github.com/DauHoangTai/CTF/tree/master/2021/wectf
+[SOURCE](https://github.com/DauHoangTai/CTF/tree/master/2021/wectf)
 ## Challenge Include
 Mới vào thì chúng ta được cung cấp source như sau và được cung cấp flag ở `/flag.txt`
 ```php
