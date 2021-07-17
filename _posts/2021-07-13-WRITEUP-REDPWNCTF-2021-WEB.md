@@ -252,6 +252,7 @@ String url = (String)ctx.queryParam("url", String.class).get();
 Thì đầu tiên ở đây chúng ta cần bypass được đoạn `urlURI.getHost().contains("couchdb")` và được biết flag được lưu trong couchdb nên vô docs của couchdb đọc và tìm thấy API `{db}/_find` [document](https://docs.couchdb.org/en/stable/api/database/find.html) => chúng ta có thể sử dụng `selector ` và regex để blind (nosql injection)
 - Để bypass `couchdb` thì do hàm `.contains` chỉ đúng khi chuỗi đưa vào đúng 100% với chuỗi lọc => chúng ta chỉ cần thay một kí tự in ra trong couchdb thì có thế bypass.
 - Dùng regex để blind các kí tự có trong flag. Nếu như kí tự đó đúng thì sẽ trả về 500.
+
 ### Payload
 Step 1: tạo user thông qua `createUser` -> `https://requester.mc.ax/createUser?username=taidh&password=taidh`
 Step 2: Mình đã viết 1 đoạn script để thực hiện việc blind này.
