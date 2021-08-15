@@ -13,9 +13,11 @@ Source code và payload của các bài mình giải được mình bỏ ở đ�
 Bài này là một bài xss và được viết bằng golang. Mình sẽ tập trung vào file `server.go`.
 Cụ thể ở function `createHandler`.
 ![image](https://user-images.githubusercontent.com/54855855/129487635-775f2a92-1c36-4dd3-9d7a-59c7fad1704d.png)
-Mỗi bài mà chúng ta tạo đều có hash riêng và nếu như hash đó bằng với hash_admin thì không có `sanitize`
+Mỗi bài mà chúng ta tạo đều có hash riêng và nếu như hash đó bằng với hash_admin thì không có `sanitize`.
+
 Function `sanitize`
 ![image](https://user-images.githubusercontent.com/54855855/129487683-2a439e10-b9f3-4287-aa61-106caa71181b.png)
+
 Ở func này chỉ có chức năng là EscapeString (htmlencode) chống mình xss.
 => Mình chỉ cần tìm ra `admin_hash` thì có thể nhảy qua được `sanitize` và xss bình thường.
 
@@ -87,7 +89,7 @@ CONFIG = Config{
 ```
 Func này tạo admin_hash nhưng khi gọi `getadminhash()` trong khi CONFIG chưa khởi tạo xong => admin_hash blank.
 Đây là script của author, mọi người có thể tham khảo.
-https://gist.github.com/yadhukrishnam/83ba65195ace0f1d526091e248638caf
+[Link script](https://gist.github.com/yadhukrishnam/83ba65195ace0f1d526091e248638caf)
 
 Payload solved bot
 ```py
@@ -351,12 +353,12 @@ data='{'+data+'}'
 ```
 Sau khi thêm vào thì data sẽ được biến thành cấu trúc json và sử dụng `ujson.load(data)` để load dữ liệu.
 Vì mình gặp json khá nhiều nên sau khi đọc tới đoạn `ujson.loads(data)` thì mình nhớ đến bài viết này
-https://labs.bishopfox.com/tech-blog/an-exploration-of-json-interoperability-vulnerabilities
+[Document JSON](https://labs.bishopfox.com/tech-blog/an-exploration-of-json-interoperability-vulnerabilities)
 => sử dụng unicode thể bypass các thứ trên để tạo `role=superuser` và add thêm `name=admin`.
 
 Tiếp tục qua file `app.js`.
 Ngồi đọc code một hồi thì không thấy có gì lạ và exploit chỗ nào. Bỗng dưng thấy thư viện này khá lạ và bắt đầu tìm hiểu về nó và thấy được có một CVE gần đây và cùng version và server đang sử dụng.
-https://blog.diefunction.io/vulnerabilities/ghsl-2021-023
+[CVE-2021-32819](https://blog.diefunction.io/vulnerabilities/ghsl-2021-023)
 Để hiểu hơn thì bạn có thể đọc bài phân tích về CVE đó nhá.
 Ở đây mình lấy luôn payload của họ và sửa lại và thêm prototype pollution để exploit.
 
