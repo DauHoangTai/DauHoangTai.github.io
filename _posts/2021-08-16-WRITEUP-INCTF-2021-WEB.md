@@ -357,9 +357,39 @@ Vì mình gặp json khá nhiều nên sau khi đọc tới đoạn `ujson.loads
 => sử dụng unicode thể bypass các thứ trên để tạo `role=superuser` và add thêm `name=admin`.
 
 Tiếp tục qua file `app.js`.
-Ngồi đọc code một hồi thì không thấy có gì lạ và exploit chỗ nào. Bỗng dưng thấy thư viện này khá lạ và bắt đầu tìm hiểu về nó và thấy được có một CVE gần đây và cùng version và server đang sử dụng.
+```js
+ if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No files were uploaded.');
+    }
+    uploadFile = req.files.uploadFile;
+    uploadPath = __dirname + '/package.json' ;
+    uploadFile.mv(uploadPath, function(err) {
+        if (err)
+            return res.status(500).send(err);
+        try{
+            var config = require('config-handler')();
+        }
+        catch(e){
+            const src = "package1.json";
+            const dest = "package.json";
+            fs.copyFile(src, dest, (error) => {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+                console.log("Copied Successfully!");
+            });
+            return res.sendFile(__dirname+'/static/error.html')
+        }
+```
+Ở đây chỉ có chức năng tải lên 1 file `.json` sau đó được copy vào tệp `package.json` và cuối cùng được load bằng `var config = require('config-handler')();`.
+
+Đầu tiên thì thấy được `config-handler` có thể tấn công `Prototype_Pollution`.
+
+Ngồi đọc code một hồi thì không thấy có gì lạ và exploit chỗ nào. Bỗng dưng thấy thư viện `squirrelly` này khá lạ và bắt đầu tìm hiểu về nó và thấy được có một CVE gần đây và cùng version và server đang sử dụng.
 [CVE-2021-32819](https://blog.diefunction.io/vulnerabilities/ghsl-2021-023)
 Để hiểu hơn thì bạn có thể đọc bài phân tích về CVE đó nhá.
+
 Ở đây mình lấy luôn payload của họ và sửa lại và thêm prototype pollution để exploit.
 
 ### Payload
