@@ -5,7 +5,7 @@ categories: CTF
 toc: true
 ---
 
-Ở bài này mình chỉ viết về 4 challeng của mình nha. (Eval ga VKL 1, Eval ga VKL 2, Baby SQL, FreeFlag).
+Ở bài này mình chỉ viết về 4 challenge của mình nha. (Eval ga VKL 1, Eval ga VKL 2, Baby SQL, FreeFlag).
 
 Source tất cả các bài mình để ở đây [SOURCE](https://github.com/DauHoangTai/CTF/tree/master/2021/webvkl-CTF)
 ## Challenge Eval ga VKL 1 (5 solved)
