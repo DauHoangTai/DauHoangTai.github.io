@@ -5,7 +5,7 @@ categories: CTF
 toc: true
 ---
 
-Ở bài này mình chỉ viết về 4 challeng của mình nha. (Eval ga VKL 1, Eval ga VKL 2, Baby SQL, FreeFlag).
+Ở bài này mình chỉ viết về 4 challenge của mình nha. (Eval ga VKL 1, Eval ga VKL 2, Baby SQL, FreeFlag).
 
 Source tất cả các bài mình để ở đây [SOURCE](https://github.com/DauHoangTai/CTF/tree/master/2021/webvkl-CTF)
 ## Challenge Eval ga VKL 1 (5 solved)
@@ -29,7 +29,7 @@ if (isset($_GET['cmd'])) {
 ```
 Đầu vào là `cmd` được filter khá kĩ, kiểm tra đầu vào nếu có 2 dấu chấm trở lên thì die và limit len là < 65. Nhưng chú ý thì không có system, exec hay các hàm có thể RCE.
 Thử với `?cmd=system(id)` thì nhận được blank page => đời không như là mơ.
-Đọc phpinfo() thì thấy các hàm có thể RCE đã bị disable function.
+Đọc phpinfo() thì thấy các hàm có thể RCE đã bị disable.
 Bây giờ quay lại xem có thể sài những kí tự hay hàm nào: `chr strlen log log1p 2 1 print_r readfile end current next` -> đây là một số hàm có thể sử dụng. Bạn có thể check kĩ hơn và viết code để so disable function với function có trong php thì sẽ ra những hàm nào không bị disable nhé.
 
 ### Payload
@@ -262,6 +262,6 @@ Payload đọc flag -> ?id = 0 union select null,null,(select flag_real_siu_cap 
 Ở bài này có 1 solved và sử dụng hex, mọi người có thể tìm hiểu về hex và sử dụng nó cũng được nhé. Mình đã quên hàm đó :3
 
 ## Lời kết
-Cảm ơn tất cả mọi người đã tham gia WEB-VKL CTF 2021, mong đây là 1 dịp cho mọi người luyện lại các kĩ năng mà bản thân đã học được cũng như giúp được một số bạn học được kiến thức mới. Nếu có một số sai xót gì về challenge thì mong các bạn bỏ qua ♥
+Cảm ơn tất cả mọi người đã tham gia WEB-VKL CTF 2021, mong đây là 1 dịp cho mọi người luyện lại các kĩ năng mà bản thân đã học được cũng như giúp được một số bạn học được kiến thức mới. Nếu có một số sai sót gì về challenge thì mong các bạn bỏ qua ♥
 
 THANK YOU !
