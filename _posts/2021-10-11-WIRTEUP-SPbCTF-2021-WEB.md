@@ -152,7 +152,8 @@ Kết quả là nhận được content của file /etc/passwd nhưng chúng ta 
 
 ### Payload
 - Code race `race.py`. Mọi người nhớ thay session và id nhé.
-```
+
+```py
 import requests
 import string
 import sys
