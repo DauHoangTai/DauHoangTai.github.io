@@ -78,7 +78,7 @@ unlink("/var/www/html/upload/$id/$name"); // xóa file up lên sau khi end chư�
 - Đầu tiên mình tham số cho POST `data` và upload 1 file xml lên.
 - Tạo một file `html` để upload file
 
-```html
+```
 <form action="http://62.84.114.238/" method="post" enctype="multipart/form-data">
   <input type="file" id="data" name="data">
   <input type="submit">
