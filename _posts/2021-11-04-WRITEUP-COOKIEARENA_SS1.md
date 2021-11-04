@@ -7,7 +7,10 @@ toc: true
 
 Đây là mùa đầu tiên của cookie arena và mình may mắn đã giải được hết các challenge của CTF này. Và dưới đây và writeup của một số challenge mình đã giải được.
 
-Tổng hợp payload mình sẽ để ở đây [SRC]()
+Btw, Khá may mắn khi mình leo được top 1
+![image](https://user-images.githubusercontent.com/54855855/140301444-e9b4c53a-b0aa-4e30-8557-37ce10b4f68b.png)
+
+Tổng hợp payload mình sẽ để ở đây [SRC](https://github.com/DauHoangTai/WriteupCTF/tree/master/wargame/CookieArenaSS1)
 
 <h1>WEB BASIC</h1>
 
@@ -492,5 +495,10 @@ Copy chuỗi hex này, vô [Cyberchef](https://gchq.github.io/CyberChef/#recipe=
 
 Các bạn tiếp tục lại với payload trên và thay `c1-60` thành `c61-100` và thay `script_dir`, `command_log_file` để khỏi bị duplicate và nhận nửa flag còn lại nhé.
 
+Để tham khảo về backticks là gì thì mọi người vô đây đọc nha [Backticks](https://qastack.vn/unix/27428/what-does-backquote-backtick-mean-in-commands)
+
 ### Flag
 `Flag{CookieWarrior_Please_Think_Out_Of_The_Box}`
+
+## Lời kết
+Cảm ơn Cookie Hân Hoan đã tạo sân chơi về security cho các bạn trẻ như em có nơi để luyện tập và học hỏi thêm điều mới. Cũng như cảm ơn đến anh Đoàn Lê Mạnh Tùng đã tạo ra nhiều challenge web hấp dẫn. 
