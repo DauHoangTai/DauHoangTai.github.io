@@ -207,7 +207,7 @@ Chạy file này với command `python3 payload.py http://34.124.209.122:1337`. 
 ![image](https://user-images.githubusercontent.com/54855855/141679163-21adcb12-0fbc-46f6-b811-a70fc86142d2.png)
 BONUS: Tối hôm đó mình solved, có vẻ như chall vẫn đang được patch bằng cách replace thêm 1 số kí tự như `["{{","/", "*", "'", '"', "o","r"]`. Vì vậy mình không thể solved bằng payload trên mà mình đã thay bằng:
 ```
-{{config.__class__.__init__.__globals__['os'].system('/?eadflag > /tmp/taidh')}}
+\{\{config.__class__.__init__.__globals__['os'].system('/?eadflag > /tmp/taidh')\}\}
 ```
 Cuối cùng mình sử dụng `xml` lúc đầu để đọc `environ` để đọc flag bằng đường dẫn `/tmp/taidh`. Nhưng mình không hiểu tại sao vẫn có thể sài `"` `'` và `{{` bình thường mặc dù nó nằm trong `blacklist`. Chỉ có mỗi `r` bị replace :D
 
