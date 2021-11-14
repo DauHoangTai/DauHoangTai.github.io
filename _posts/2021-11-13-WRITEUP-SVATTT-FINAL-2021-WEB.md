@@ -150,6 +150,8 @@ Payload read environ để lấy `SECRET_KEY`
 </foo>
 </root>
 ```
+Ở `xpath` thì nhập `*`
+
 File `payload.py`
 
 {% highlight python %}
