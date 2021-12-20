@@ -6,7 +6,7 @@ toc: true
 render_with_liquid: false
 ---
 
-Xin chào mọi người. Có lẽ đây là ctf trong nước cuối cùng mà mình chơi trong năm 2021 này, vì vậy mình muốn lưu lại một cái gì đó kỉ niệm cũng như những solution cho những challenge web khá hay mà cuộc thi đã phát hành.
+Xin chào mọi người. Gần bước qua năm mới thì có 1 ctf của UIT tổ chức, đây là dịp để ôn luyện lại kiến thức mình đã học được và cũng như học được những thứ mới vì vậy mình muốn lưu lại một cái gì đó kỉ niệm cũng như những solution cho những challenge web khá hay mà cuộc thi đã phát hành.
 
 Tất cả source code của bài mình để ở đây nhé  [SOURCE](https://github.com/DauHoangTai/WriteupCTF/tree/master/wargame/UIT_CTF)
 
@@ -18,8 +18,8 @@ Bài này thì tác giả không cung cấp source nên việc mình làm đầu
 ### IDEA
 - Khi mình thấy input được đưa vào sẽ base64 encode nhưng đưa chuỗi base64 encode đó qua route `/decode` để decode thì sẽ trả về lại chuỗi ban đầu của chúng ta nhập vào thì mình đã nghĩ có thể bài này liên quan đến `xss` hoặc `ssti`. Nhưng mình không thấy có route vào để send cho bot hay link bot => có vẻ không phải xss.
 - Khi mình check `header` mà reponse trả về là `Server: Werkzeug/2.0.2 Python/3.8.12` => có thể `ssti`.
-- Tới đây mình thử payload đơn giản của ssti `{{1-1}}` (base64 encode trước), nếu như kết quả sau khi decode bằng `0` => sure ssti. 
-- Nhưng kết quả trả về `WAF: <-- / -->` => có thể một số kí tự đã bị lọc, mình có thử thêm `+ - *` thì cũng bị lọc hết. Mình có thử tiếp payload `{{config}}` nhưng kết quả `config` vẫn bị lọc. Tới đây dù kết quả mình mong muốn là `0` như ban đầu để confirm bài này dính `ssti` nhưng từ các char bị filter ở trên thì mình đã phần nào đoán ra và sure bài này là `ssti`.
+- Tới đây mình thử payload đơn giản của ssti {% raw %}`{{1-1}}`{% endraw %} (base64 encode trước), nếu như kết quả sau khi decode bằng `0` => sure ssti. 
+- Nhưng kết quả trả về `WAF: <-- / -->` => có thể một số kí tự đã bị lọc, mình có thử thêm `+ - *` thì cũng bị lọc hết. Mình có thử tiếp payload {% raw %}`{{config}}`{% endraw %} nhưng kết quả `config` vẫn bị lọc. Tới đây dù kết quả mình mong muốn là `0` như ban đầu để confirm bài này dính `ssti` nhưng từ các char bị filter ở trên thì mình đã phần nào đoán ra và sure bài này là `ssti`.
 - Nhiệm vụ của mình bây giờ cần đi tìm những kí nào khác bị filter để từ đó có thể gen ra 1 payload có thể rce.
 - Sau một thời gian thì mình đã tìm ra một số char và chuỗi bị filter: `[ ] config session request cycler self lipsum` thêm một số char đi kèm với nhau mới bị lọc như `""`, `''`,{% raw %}`{{()`{% endraw %}.
 - Nhưng có một số kí tự sau có thể gen thành payload mà mình hay sài thì không bị filter `\ ' " ()` => mình sử dụng những char này (cách này là sử dụng unicode).
