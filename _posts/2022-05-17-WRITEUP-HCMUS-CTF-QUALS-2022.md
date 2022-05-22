@@ -2,7 +2,6 @@
 title: HCMUS CTF 2022 Quals
 tags: CTF
 ---
-[toc]
 
 # Challenge URL Storing
 ### Phân tích code
@@ -47,7 +46,7 @@ File `index.php`
 
 File `store.php`
 
-```php=
+```php
 <?php
     error_reporting(0);
     if (!isset($main)) {
@@ -74,7 +73,7 @@ File `store.php`
 
 ### Payload
 
-```python=
+```python
 import requests
 
 URL = 'http://103.245.250.31:32184'
@@ -106,7 +105,7 @@ Dù register thành công nhưng login thì sẽ không được. Mình sẽ nó
 
 File `src/app/main.js` trong `webpack`
 
-```javascript=
+```javascript
 function getCookie (name) {
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${name}=`)
@@ -147,7 +146,8 @@ Chat `flag` để nhận flag
 # Challenge ShopcuteV3
 ### Phân tích code
 File `login.php`
-```php=
+
+```php
 <?php
     include("config.php");
     session_start();
@@ -181,7 +181,8 @@ File `login.php`
 - Chương trình có check một số kí tự `'`,`"` khỏi escape để SQLi nhưng ở đây có thể bypass bằng `\`
 - `$_SESSION['username']` và `$_SESSION['api_path']` sẽ được gán bằng giá trị trả về của `$row['username'` và `$row['path']` tương ứng
 File `flag.php`
-```php=
+
+```php
 <?php
     header('Content-Type: application/json');
     $response = new stdClass();
@@ -197,7 +198,8 @@ File `flag.php`
 - Phải đăng nhập từ `127.0.0.1` thì reponse trả về sẽ là flag được lấy từ biến FLAG nằm trong `enviroment`
 - Ở đây có thể đoán được là cần SSRF để truy cập vô đây
 File `shopping.php`
-```php=
+
+```php
 <?php
 include("config.php");
 session_start();
@@ -230,7 +232,7 @@ username=\&password= union select 1,0x403132372e302e302e312f666c61672e70687023--
 # Challenge SecureNote
 ### Phân tích code
 File `setup_flag.py`
-```python=
+```python
 import requests
 import secrets
 import time
@@ -268,7 +270,7 @@ print('[+] Setup flag done!')
 - File này cho biết được flag nằm ở note của account `admin`
 
 File `app.py`
-```python=
+```python
 [TRUNCATED]
 @app.route('/read_note', methods=['GET'])
 def read_note():
@@ -284,7 +286,7 @@ def read_note():
 ```
 - Có thể control được filename => `path traversal` ở đây đọc file tùy ý
 
-```python=
+```python
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     [TRUNCATED]
@@ -305,7 +307,7 @@ def register():
 - Check `username` và `secretkey` qua hàm `waf_filter` ở trong file `utils/security`
 - `password` đưa sau trước khi insert sẽ được hash md5
 
-```python=
+```python
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'GET':
@@ -349,7 +351,7 @@ Tóm lại:
 # Challenge No Frontend
 
 ### Payload
-```python=
+```python
 import string
 from random import choices
 import requests
