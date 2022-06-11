@@ -1,6 +1,7 @@
 ---
 title: HCMUS CTF 2022 Quals
 tags: CTF
+toc: true
 ---
 
 # Challenge URL Storing
