@@ -1,6 +1,7 @@
 ---
 title: HCMUS CTF 2022 Quals
 tags: CTF
+categories: CTF
 toc: true
 ---
 
