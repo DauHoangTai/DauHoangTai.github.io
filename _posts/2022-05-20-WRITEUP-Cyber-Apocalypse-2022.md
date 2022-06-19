@@ -1,6 +1,7 @@
 ---
 title: Cyber Apocalypse CTF 2022 - Writeup
 tags: CTF
+categories: CTF
 toc: true
 ---
 # HTB Cyber Apocalypse CTF 2022 - Web Writeup
