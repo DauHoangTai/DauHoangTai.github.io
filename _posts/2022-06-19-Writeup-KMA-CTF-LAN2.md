@@ -228,9 +228,8 @@ Description của bài mà người bạn đã chụp cho mình.
 ### Setup
 Sau khi tải `tlaucher` xong để chạy được game thì cần chọn đúng version `1.15` như dưới nhé, vì server được cung cấp là `server_1.15`.
 ![](https://i.imgur.com/LpYtSL2.png)
-:::info
-Ở đây mình đã tải rồi nên sẽ không có nút Install.
-:::
+- Ở đây mình đã tải rồi nên sẽ không có nút Install.
+
 Tiếp tục vào phần `Mutiplayer` để add thêm server của mình hoặc của tác giả.
 
 Để chạy server ở localhost thì có thể sử dụng `Dockerfile` mà tác giả cung cấp hoặc chạy thẳng file `server_1.15.jar`. Ở đây mình chạy thẳng file `jar` luôn. (Về việc setup java thì mình sẽ không nói đến, mọi người tự tìm hiểu trên google nhé).
@@ -264,9 +263,7 @@ Mình quyết định sửa lại payload của `CommonsCollectionsK1` từ `lda
 
 Command chạy tool:
 ![](https://i.imgur.com/XXrWUVy.png)
-:::info
-Mọi người thay IP VPS vào chỗ bị bôi bỏ
-:::
+- Mọi người thay IP VPS vào chỗ bị bôi bỏ
 
 Payload send để lấy flag
 ```
